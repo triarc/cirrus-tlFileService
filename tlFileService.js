@@ -60,7 +60,7 @@ var Triarc;
             return FileService;
         })();
         Web.FileService = FileService;
-        angular.module("tlFileService").service(FileService.serviceId, FileService);
+        angular.module("tlFileService", []).service(FileService.serviceId, FileService);
     })(Web = Triarc.Web || (Triarc.Web = {}));
 })(Triarc || (Triarc = {}));
 
