@@ -11,7 +11,7 @@ var Triarc;
                 if (!isMobile) {
                     var link = document.createElement("a");
                     link.href = url;
-                    link.target = "_blank";
+                    link.target = "_self";
                     link.click();
                     return this.$q.when(true);
                 }
