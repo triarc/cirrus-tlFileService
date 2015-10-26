@@ -38,10 +38,10 @@ var Triarc;
             };
             FileService.prototype.mobileDownload = function (url, name) {
                 var q = this.$q.defer();
-                window.resolveLocalFileSystemURI(cordova.file.externalApplicationStorageDirectory, function (entry) {
+                window.resolveLocalFileSystemURI(window.cordova.file.externalApplicationStorageDirectory, function (entry) {
                     entry.getFile(name, { create: true }, function (fileEntry) {
                         var transfer = new FileTransfer();
-                        var target = cordova.file.externalApplicationStorageDirectory + name;
+                        var target = window.cordova.file.externalApplicationStorageDirectory + name;
                         transfer.download(encodeURI(url), target, function (file) {
                             q.resolve(file);
                         }, function (error) {
