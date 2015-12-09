@@ -4,7 +4,9 @@
   "authors": [
     "Max Luethi <ml@triarc-labs.com>"
   ],
-  "main": "tlFileService.js",
+  "main": [
+    "tlFileService.js"
+  ],
   "moduleType": [
     "globals"
   ],
