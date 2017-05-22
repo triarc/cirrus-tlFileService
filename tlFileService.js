@@ -25,11 +25,15 @@ var Triarc;
                     downloadEvents.downloading();
                     return this.mobileDownload(url, fileName).then(function (file) {
                         var q = _this.$q.defer();
-                        window.cordova.plugins.FileOpener.openFile(file.nativeURL, function () {
+                        var ref = window.cordova.InAppBrowser.open(file.nativeURL, '_system');
+                        ref.addEventListener('loadstop', function () {
+                            ref.show();
                             q.resolve(true);
-                        }, function (err) {
+                        });
+                        ref.addEventListener('loaderror', function (err) {
                             console.log(err);
                             downloadEvents.failedOpening();
+                            ref.close();
                             q.reject(err);
                         });
                         return q.promise;
@@ -58,7 +62,7 @@ var Triarc;
             FileService.serviceId = "tlFileService";
             FileService.$inject = ["$q"];
             return FileService;
-        })();
+        }());
         Web.FileService = FileService;
         angular.module("tlFileService", []).service(FileService.serviceId, FileService);
     })(Web = Triarc.Web || (Triarc.Web = {}));
