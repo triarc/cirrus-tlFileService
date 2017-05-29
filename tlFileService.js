@@ -7,7 +7,6 @@ var Triarc;
                 this.$q = $q;
             }
             FileService.prototype.downloadFile = function (url, fileName, isMobile, downloadEvents) {
-                var _this = this;
                 if (!isMobile) {
                     var link = document.createElement("a");
                     link.href = url;
@@ -24,19 +23,8 @@ var Triarc;
                     }
                     downloadEvents.downloading();
                     return this.mobileDownload(url, fileName).then(function (file) {
-                        var q = _this.$q.defer();
                         var ref = window.cordova.InAppBrowser.open(file.nativeURL, '_system');
-                        ref.addEventListener('loadstop', function () {
-                            ref.show();
-                            q.resolve(true);
-                        });
-                        ref.addEventListener('loaderror', function (err) {
-                            console.log(err);
-                            downloadEvents.failedOpening();
-                            ref.close();
-                            q.reject(err);
-                        });
-                        return q.promise;
+                        return true;
                     });
                 }
             };
